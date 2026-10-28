@@ -1,0 +1,110 @@
+﻿@page "/"
+
+<h1>Calculadora</h1>
+
+<p>&nbsp; @numero1</p>
+<p>&nbsp; @operacao</p>
+<p>&nbsp; @numero2</p>
+<p>&nbsp; @resultado</p>
+
+<button @onclick='() => DigitarNumero("1")'>1</button>
+<button @onclick='() => DigitarNumero("2")'>2</button>
+<button @onclick='() => DigitarNumero("3")'>3</button>
+
+<br />
+
+<button @onclick='() => DigitarNumero("4")'>4</button>
+<button @onclick='() => DigitarNumero("5")'>5</button>
+<button @onclick='() => DigitarNumero("6")'>6</button>
+
+<br />
+
+<button @onclick='() => DigitarNumero("7")'>7</button>
+<button @onclick='() => DigitarNumero("8")'>8</button>
+<button @onclick='() => DigitarNumero("9")'>9</button>
+
+<br />
+<button @onclick='() => DigitarNumero("0")'>0</button>
+<br />
+
+<button @onclick='() => EscolherOperacao("+")'>+</button>
+<button @onclick='() => EscolherOperacao("-")'>-</button>
+<button @onclick='() => EscolherOperacao("x")'>x</button>
+<button @onclick='() => EscolherOperacao("/")'>/</button>
+
+<br />
+
+<button @onclick= => CalcularResultado() >=</button>
+<button @onclick= => Apagar >C</button>
+
+@code {
+    string numero1 = "";
+    string numero2 = "";
+    string operacao = "";
+    double resultado = 0;
+    bool digitandoNumero1 = true;
+
+    void DigitarNumero(string numero)
+    {
+        if (digitandoNumero1 == true)
+        {
+            numero1 += numero;
+        }
+
+        else
+        {
+            numero2 += numero;
+        }
+
+    }
+
+    void EscolherOperacao(string op)
+    {
+        operacao = op;
+        digitandoNumero1 = false;
+    }
+
+    void Apagar()
+    {
+        numero1 = "";
+        numero2 = "";
+        operacao = "";
+
+        resultado = 0;
+        digitandoNumero1 = true;
+    }
+
+    void CalcularResultado()
+    {
+        double n1 = double.Parse(numero1);
+        double n2 = double.Parse(numero2);
+        resultado = Calculo (n1, n2, operacao);
+    }
+
+    double Calculo(double numero1, double numero2, string operacao)
+    {
+        double resultado = 0;
+
+        if (operacao == "+")
+        {
+            resultado = numero1 + numero2;
+        }
+
+        else if (operacao == "-")
+        {
+            resultado = numero1 - numero2;
+        }
+
+        else if (operacao == "x")
+        {
+            resultado = numero1 * numero2;
+        }
+
+        else if (operacao == "/")
+        {
+            resultado = numero1 / numero2;
+        }
+        return resultado;
+    }
+}
+
